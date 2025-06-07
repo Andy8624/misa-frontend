@@ -1,0 +1,12 @@
+import { AccountantResponse } from "@/interfaces/accountant.interface";
+import axiosInstance from "@/lib/axios";
+
+export const accountantService = {
+  async callGetAll(param: string = "") {
+    const path = `/accountants${param}`;
+    console.log(path);
+    const response = await axiosInstance.get<AccountantResponse>(path);
+    console.log("Accountant Data", response);
+    return response?.data;
+  },
+};
