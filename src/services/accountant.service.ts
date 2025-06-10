@@ -1,5 +1,5 @@
 import { AccountantResponse } from "@/interfaces/accountant.interface";
-import axiosInstance from "@/lib/axios";
+import axiosInstance from "@/libs/axios";
 
 export const accountantService = {
   async callGetAll(param: string = "") {

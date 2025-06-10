@@ -3,7 +3,7 @@ import {
   LoginPayload,
   RegisterPayload,
 } from "@/interfaces/auth.interface";
-import axiosInstance from "@/lib/axios";
+import axiosInstance from "@/libs/axios";
 
 export const authService = {
   async login(payload: LoginPayload) {
