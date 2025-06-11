@@ -6,6 +6,7 @@ import AuthLayout from '../layout'
 import FormInput from '../components/input'
 import Button from '../components/button'
 import { authService } from '@/services/auth.service'
+import { ROUTES } from '@/constants/routes'
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
@@ -16,7 +17,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (authService.isAuthenticated()) {
-            router.push('/dashboard')
+            router.push(ROUTES.ADMIN.CUSTOMER.LIST)
         }
     }, [router])
 
@@ -47,7 +48,7 @@ const LoginPage = () => {
             const response = await authService.login({ email, password })
             console.log(response)
             if (response.access_token) {
-                router.push('/dashboard')
+                router.push(ROUTES.ADMIN.CUSTOMER.LIST)
             } else {
                 setError('Invalid response from server')
             }

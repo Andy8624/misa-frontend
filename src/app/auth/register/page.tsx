@@ -7,6 +7,7 @@ import FormInput from '../components/input'
 import Button from '../components/button'
 import { authService } from '@/services/auth.service'
 import { Gender } from '@/interfaces/global.interface'
+import { ROUTES } from '@/constants/routes'
 
 const RegisterPage = () => {
     const [formData, setFormData] = useState({
@@ -85,7 +86,7 @@ const RegisterPage = () => {
             }
             // console.log(data)
             await authService.register(data)
-            router.push('/auth/login')
+            router.push(ROUTES.AUTH.LOGIN)
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
@@ -187,7 +188,7 @@ const RegisterPage = () => {
                 />
                 <div className="text-center">
                     <Link
-                        href="/auth/login"
+                        href={ROUTES.AUTH.LOGIN}
                         className="text-sm font-medium text-blue-600 hover:text-blue-500"
                     >
                         Already have an account? Sign in
