@@ -1,4 +1,3 @@
-import { AccountantResponse } from "@/interfaces/accountant.interface";
 import { EmployeeResponse } from "@/interfaces/employee.interface";
 import axiosInstance from "@/libs/axios";
 

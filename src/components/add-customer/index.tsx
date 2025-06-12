@@ -1,45 +1,63 @@
 import { Modal } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CreatePartnerPayload, LegalType, PartnerType } from "@/interfaces/partner.interface";
 
-export const AddCustomer: React.FC<{
-  handleAddCustomer: any;
+interface AddCustomerProps {
+  handleAddCustomer: (data: CreatePartnerPayload) => Promise<boolean>;
   isModalOpen: boolean;
-  setIsModalOpen: any;
-}> = ({ handleAddCustomer, isModalOpen, setIsModalOpen }) => {
-  const [options, setOptions] = useState("organization");
-  const [isSupplier, setIsSupplier] = useState(false);
+  setIsModalOpen: (value: boolean) => void;
+}
+
+export const AddCustomer: React.FC<AddCustomerProps> = ({
+  handleAddCustomer,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
+  const [legalType, setLegalType] = useState<LegalType>(LegalType.ORGANIZATION);
+  const [partnerType, setPartnerType] = useState<PartnerType>(PartnerType.CLIENT);
   const [taxCode, setTaxCode] = useState("");
-  const [code, setCode] = useState("");
+  const [partnerCode, setPartnerCode] = useState("");
   const [govUnitCode, setGovUnitCode] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [website, setWebsite] = useState("");
-  const [name, setName] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
+  const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
+  const [customerId, setCustomerId] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCustomerId(localStorage.getItem("CustomerID") || "");
+    }
+  }, []);
 
   const handleActionAdd = async () => {
-    const check: boolean = await handleAddCustomer({
-      type: 'customer',
-      options,
-      is_supplier: isSupplier,
-      tax_code: taxCode,
-      code,
-      goc_unit_code: govUnitCode,
-      phone_number: phoneNumber,
-      website,
-      name,
-      address
-    })
-    if(check) {
-      setIsSupplier(false)
-      setTaxCode("")
-      setCode("")
-      setGovUnitCode("")
-      setPhoneNumber("")
-      setWebsite("")
-      setName("")
-      setAddress("")
+    const data: CreatePartnerPayload = {
+      partnerCode,
+      partnerType,
+      legalType,
+      taxCode,
+      govUnitCode,
+      phoneNumber,
+      websiteUrl,
+      fullName,
+      address,
+      customerId
+    };
+
+    const success = await handleAddCustomer(data);
+    if (success) {
+      // Reset form
+      setLegalType(LegalType.ORGANIZATION);
+      setPartnerType(PartnerType.CLIENT);
+      setTaxCode("");
+      setPartnerCode("");
+      setGovUnitCode("");
+      setPhoneNumber("");
+      setWebsiteUrl("");
+      setFullName("");
+      setAddress("");
     }
-  }
+  };
 
   return (
     <Modal
@@ -59,11 +77,11 @@ export const AddCustomer: React.FC<{
               <input
                 id="default-radio-1"
                 type="radio"
-                value="organization"
-                name="default-radio"
-                checked={options === "organization"}
-                onChange={(e) => setOptions(e.target.value)}
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                value={LegalType.ORGANIZATION}
+                name="legal-type"
+                checked={legalType === LegalType.ORGANIZATION}
+                onChange={(e) => setLegalType(e.target.value as LegalType)}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
               />
               <label className="ms-2 text-sm font-medium text-gray-900">
                 Tổ chức
@@ -73,11 +91,11 @@ export const AddCustomer: React.FC<{
               <input
                 id="default-radio-2"
                 type="radio"
-                value="individual"
-                checked={options === "individual"}
-                onChange={(e) => setOptions(e.target.value)}
-                name="default-radio"
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                value={LegalType.INDIVIDUAL}
+                checked={legalType === LegalType.INDIVIDUAL}
+                onChange={(e) => setLegalType(e.target.value as LegalType)}
+                name="legal-type"
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
               />
               <label className="ms-2 text-sm font-medium text-gray-900">
                 Cá nhân
@@ -88,12 +106,14 @@ export const AddCustomer: React.FC<{
             <input
               type="checkbox"
               className="h-4 w-4"
-              checked={isSupplier}
-              onChange={(e) => setIsSupplier(e.target.checked)}
+              checked={partnerType === PartnerType.SUPPLIER}
+              onChange={(e) => setPartnerType(e.target.checked ? PartnerType.SUPPLIER : PartnerType.CLIENT)}
             />
             <p>Là nhà cung cấp</p>
           </div>
         </div>
+
+        {/* Update input names and values */}
         <div className="flex gap-4">
           <div className="flex-grow-1">
             <p>Mã số thuế</p>
@@ -108,8 +128,8 @@ export const AddCustomer: React.FC<{
             <p>Mã khách hàng</p>
             <input
               type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
+              value={partnerCode}
+              onChange={(e) => setPartnerCode(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
           </div>
@@ -137,8 +157,8 @@ export const AddCustomer: React.FC<{
             <p>Website</p>
             <input
               type="text"
-              value={website}
-              onChange={(e) => setWebsite(e.target.value)}
+              value={websiteUrl}
+              onChange={(e) => setWebsiteUrl(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
           </div>
@@ -148,8 +168,8 @@ export const AddCustomer: React.FC<{
             <p>Tên khách hàng</p>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
           </div>

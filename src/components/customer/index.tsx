@@ -1,45 +1,49 @@
 import { AddCustomer } from "@/components/add-customer";
 import { UpdateCustomer } from "@/components/update-customer";
+import { CreatePartnerPayload, Partner, PartnerTableKey } from "@/interfaces/partner.interface";
+import { useMessage } from "@/providers/MessageProvider";
+import { partnerService } from "@/services/partner.service";
 import { Button, Modal, Table } from "antd";
-import axios from "axios";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { IoWarningOutline } from "react-icons/io5";
 
 export const Customer: React.FC = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<Partner[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [idDelete, setIdDelete] = useState<string | null>(null);
   const [itemUpdate, setItemUpdate] = useState<any | null>(null)
+  const messageApi = useMessage()
   const columns = [
     {
       title: <p className="whitespace-nowrap">Mã khách hàng</p>,
-      dataIndex: "code",
-      key: "code",
+      dataIndex: PartnerTableKey.PARTNER_CODE,
+      key: PartnerTableKey.PARTNER_CODE,
     },
     {
       title: <p className="whitespace-nowrap">Tên khách hàng</p>,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: PartnerTableKey.FULL_NAME,
+      key: PartnerTableKey.FULL_NAME,
     },
     {
       title: <p className="whitespace-nowrap">Địa chỉ</p>,
-      dataIndex: "address",
-      key: "address",
+      dataIndex: PartnerTableKey.ADDRESS,
+      key: PartnerTableKey.ADDRESS,
     },
     {
       title: <p className="whitespace-nowrap">Mã số thuế</p>,
-      dataIndex: "tax_code",
-      key: "tax_code",
+      dataIndex: PartnerTableKey.TAX_CODE,
+      key: PartnerTableKey.TAX_CODE,
     },
     {
       title: <p className="whitespace-nowrap">Điện thoại</p>,
-      dataIndex: "phone_number",
-      key: "phone_number",
+      dataIndex: PartnerTableKey.PHONE_NUMBER,
+      key: PartnerTableKey.PHONE_NUMBER,
     },
     {
       title: <p></p>,
-      dataIndex: "id",
-      key: "id",
+      dataIndex: PartnerTableKey.ID,
+      key: PartnerTableKey.ID,
       render: (id: any) => (
         <div className="flex items-center gap-3">
           <Button type="primary" onClick={() => setItemUpdate(list.find((item: any) => item?.id === id) || null)}>
@@ -57,66 +61,46 @@ export const Customer: React.FC = () => {
 
   const getListCustomer = async () => {
     try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner",
-        {
-          params: {
-            filter: { type: { _eq: "customer" } },
-          },
-          headers: {
-            Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-          },
-        }
-      );
-      console.log("Khách hàng", response)
-      setList(response?.data?.data || []);
-    } catch (error) { }
+      const responseNew = await partnerService.callGetAll("?search=client")
+      setList(responseNew?.data || []);
+    } catch (error) {
+      return error;
+    }
   };
 
-  const handleAddCustomer = async (data: any) => {
+  const handleAddCustomer = async (data: CreatePartnerPayload) => {
+    console.log(data)
     let check = false;
     try {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner",
-        data,
-        {
-          headers: {
-            Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-          },
-        }
-      );
-      if (response.data?.data) {
+      const response = await partnerService.create(data)
+      if (response) {
         getListCustomer();
         setIsModalOpen(false);
         check = true;
       }
     } catch (error) {
+      console.log(error)
+      messageApi.error(((error as AxiosError<{ message: string }>)?.response?.data?.message) || 'An error occurred')
     } finally {
       return check;
     }
   };
 
-  const handleUpdateCustomer = async (data: any) => {
+  const handleUpdateCustomer = async (data: CreatePartnerPayload) => {
     let check = false;
     try {
-      if (data?.id) {
-        const response = await axios.patch(
-          process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner/" + data.id,
-          data,
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-            },
-          }
-        );
-        console.log("Khách hàng", response)
-        if (response.data?.data?.id) {
+      if (itemUpdate?.id) {
+        // console.log(itemUpdate)
+        const response = await partnerService.update(itemUpdate.id, data);
+        // console.log("Update khách hàng", response)
+        if (response) {
           getListCustomer();
           setItemUpdate(null)
           check = true;
         }
       }
     } catch (error) {
+      messageApi.error(((error as AxiosError<{ message: string }>)?.response?.data?.message) || 'An error occurred')
     } finally {
       return check;
     }
@@ -125,17 +109,13 @@ export const Customer: React.FC = () => {
   const handleAcceptDelete = async () => {
     if (idDelete) {
       try {
-        const response = await axios.delete(
-          process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner/" + idDelete,
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-            },
-          }
-        );
+        const response = await partnerService.delete(idDelete)
+        messageApi.success(response)
         setIdDelete(null);
         await getListCustomer();
-      } catch (error) { }
+      } catch (error) {
+        messageApi.error(((error as AxiosError<{ message: string }>)?.response?.data?.message) || 'An error occurred')
+      }
     }
   };
 
@@ -148,7 +128,7 @@ export const Customer: React.FC = () => {
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey={PartnerTableKey.ID} />
       </div>
       <AddCustomer
         handleAddCustomer={handleAddCustomer}

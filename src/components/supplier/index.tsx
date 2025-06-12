@@ -146,7 +146,7 @@ export const Supplier: React.FC = () => {
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <AddSupplier
         handleAddSupplier={handleAddSupplier}

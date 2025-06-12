@@ -138,7 +138,7 @@ export const Employee: React.FC = () => {
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <AddEmployee
         handleAddEmployee={handleAddEmployee}
