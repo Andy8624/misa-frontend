@@ -347,6 +347,7 @@ export default function ShowBADepositReceipt() {
           },
         }
       );
+      console.log("Bank account", response)
       setListBankAccount(response?.data?.data || []);
     } catch (error) { }
   };

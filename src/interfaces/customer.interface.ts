@@ -15,10 +15,10 @@ export interface Customer {
   ward: string | null;
   streetAddress: string;
   fullAddress: string;
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-  position: string;
+  contactName: string;
+  contactPhoneNumber: string;
+  contactEmail: string;
+  contactPosition: string;
   createdAt: string;
 }
 
@@ -38,8 +38,8 @@ export interface CreateCustomerPayload {
   district: string;
   streetAddress: string;
   fullAddress: string;
-  fullName: string;
-  phoneNumber: string;
-  email: string;
-  position: string;
+  contactName: string;
+  contactPhoneNumber: string;
+  contactEmail: string;
+  contactPosition: string;
 }

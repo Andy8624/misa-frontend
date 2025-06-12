@@ -5,13 +5,15 @@ import {
 } from "@/interfaces/auth.interface";
 import axiosInstance from "@/libs/axios";
 
+const authPath = "/auth";
+
 export const authService = {
   async login(payload: LoginPayload) {
     const response = await axiosInstance.post<AuthResponse>(
-      "/auth/login",
+      authPath + "/login",
       payload
     );
-    console.log("Login res", response);
+    // console.log("Login res", response);
     if (response?.data?.access_token) {
       localStorage.setItem("access_token", response?.data?.access_token);
     }
@@ -20,7 +22,7 @@ export const authService = {
 
   async register(payload: RegisterPayload) {
     const response = await axiosInstance.post<AuthResponse>(
-      "/auth/register",
+      authPath + "/register",
       payload
     );
     console.log("Register res", response);

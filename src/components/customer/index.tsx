@@ -68,6 +68,7 @@ export const Customer: React.FC = () => {
           },
         }
       );
+      console.log("Khách hàng", response)
       setList(response?.data?.data || []);
     } catch (error) { }
   };
@@ -108,6 +109,7 @@ export const Customer: React.FC = () => {
             },
           }
         );
+        console.log("Khách hàng", response)
         if (response.data?.data?.id) {
           getListCustomer();
           setItemUpdate(null)

@@ -41,7 +41,7 @@ const TopHeader = () => {
         fetchCustomerData();
     }, [customerId]);
 
-    console.log(customerData)
+    // console.log(customerData)
     return (
         <div className="navbar bg-base-100 border-b border-b-gray-200">
             {/* Logo section */}

@@ -67,6 +67,7 @@ export const Supplier: React.FC = () => {
           },
         }
       );
+      console.log("Nhà cc", response)
       setList(response?.data?.data || []);
     } catch (error) { }
   };

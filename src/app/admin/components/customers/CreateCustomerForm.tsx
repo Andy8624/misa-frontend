@@ -23,10 +23,10 @@ const CreateCustomerForm = ({ onSubmit, onCancel }: CreateCustomerFormProps) => 
         district: '',
         streetAddress: '',
         fullAddress: '',
-        fullName: '',
-        phoneNumber: '',
-        email: '',
-        position: ''
+        contactName: '',
+        contactPhoneNumber: '',
+        contactEmail: '',
+        contactPosition: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -292,8 +292,8 @@ const CreateCustomerForm = ({ onSubmit, onCancel }: CreateCustomerFormProps) => 
                         <div className="col-span-3">
                             <input
                                 type="text"
-                                name="fullName"
-                                value={formData.fullName}
+                                name="contactName"
+                                value={formData.contactName}
                                 onChange={handleChange}
                                 className="input input-bordered w-full"
                                 required
@@ -306,8 +306,8 @@ const CreateCustomerForm = ({ onSubmit, onCancel }: CreateCustomerFormProps) => 
                         <div className="col-span-3">
                             <input
                                 type="text"
-                                name="position"
-                                value={formData.position}
+                                name="contactPosition"
+                                value={formData.contactPosition}
                                 onChange={handleChange}
                                 className="input input-bordered w-full"
                             />
@@ -321,8 +321,8 @@ const CreateCustomerForm = ({ onSubmit, onCancel }: CreateCustomerFormProps) => 
                         <div className="col-span-3">
                             <input
                                 type="tel"
-                                name="phoneNumber"
-                                value={formData.phoneNumber}
+                                name="contactPhoneNumber"
+                                value={formData.contactPhoneNumber}
                                 onChange={handleChange}
                                 className="input input-bordered w-full"
                                 required
@@ -335,8 +335,8 @@ const CreateCustomerForm = ({ onSubmit, onCancel }: CreateCustomerFormProps) => 
                         <div className="col-span-3">
                             <input
                                 type="email"
-                                name="email"
-                                value={formData.email}
+                                name="contactEmail"
+                                value={formData.contactEmail}
                                 onChange={handleChange}
                                 className="input input-bordered w-full"
                             />

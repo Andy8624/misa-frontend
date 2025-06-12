@@ -69,8 +69,8 @@ const CustomerTable = ({ customers }: CustomerTableProps) => {
                                 </td>
                                 <td className="px-6 py-4 border-r border-gray-200">{customer.taxCode}</td>
                                 <td className="px-6 py-4 border-r border-gray-200">{customer.businessType}</td>
-                                <td className="px-6 py-4 border-r border-gray-200">{customer.fullName}</td>
-                                <td className="px-6 py-4 border-r border-gray-200">{customer.position}</td>
+                                <td className="px-6 py-4 border-r border-gray-200">{customer.contactName}</td>
+                                <td className="px-6 py-4 border-r border-gray-200">{customer.contactPosition}</td>
                                 <td className="px-6 py-4 border-r border-gray-200">{customer.customerGroup || '-'}</td>
                                 <td className="px-6 py-4 border-r border-gray-200">
                                     {format(new Date(customer.foundedDate), 'dd/MM/yyyy')}
@@ -79,8 +79,8 @@ const CustomerTable = ({ customers }: CustomerTableProps) => {
                                     {customer.vatTaxType === 'month' ? 'Tháng' : 'Quý'}
                                 </td>
                                 <td className="px-6 py-4 border-r border-gray-200">{customer.fullAddress}</td>
-                                <td className="px-6 py-4 border-r border-gray-200">{customer.phoneNumber}</td>
-                                <td className="px-6 py-4 border-r border-gray-200">{customer.email}</td>
+                                <td className="px-6 py-4 border-r border-gray-200">{customer.contactPhoneNumber}</td>
+                                <td className="px-6 py-4 border-r border-gray-200">{customer.contactEmail}</td>
                                 <td className="px-6 py-4 border-r border-gray-200">
                                     <div
                                         className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium ${customer.customerStatus === 'active'

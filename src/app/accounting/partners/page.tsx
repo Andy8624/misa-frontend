@@ -32,7 +32,7 @@ export default function Subject() {
     ];
 
     const onChange = (key: string) => {
-        console.log(key);
+        // console.log(key);
     };
 
     return (

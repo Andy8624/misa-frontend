@@ -59,6 +59,7 @@ export const Employee: React.FC = () => {
           },
         }
       );
+      console.log("Nhân viên", response)
       setList(response?.data?.data || []);
     } catch (error) { }
   };

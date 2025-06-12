@@ -116,7 +116,7 @@ export const SalesVoucherCashReceiptRead: React.FC<{
                 />
               </div>
               <div className="col-span-8">
-                <p className="font-semibold">Địa chỉ</p>
+                <p className="font-semibold">Địa chỉ</p>z
                 <input
                   type="text"
                   value={customerAddress}

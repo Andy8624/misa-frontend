@@ -7,6 +7,7 @@ import FormInput from '../components/input'
 import Button from '../components/button'
 import { authService } from '@/services/auth.service'
 import { ROUTES } from '@/constants/routes'
+import { useMessage } from '@/providers/MessageProvider'
 
 const LoginPage = () => {
     const [email, setEmail] = useState('')
@@ -14,6 +15,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
     const router = useRouter()
+    const messageApi = useMessage()
 
     useEffect(() => {
         if (authService.isAuthenticated()) {
@@ -46,8 +48,9 @@ const LoginPage = () => {
         setLoading(true)
         try {
             const response = await authService.login({ email, password })
-            console.log(response)
-            if (response.access_token) {
+            // console.log(response)
+            if (response?.access_token) {
+                messageApi.success("Đăng nhập thành công")
                 router.push(ROUTES.ADMIN.CUSTOMER.LIST)
             } else {
                 setError('Invalid response from server')
