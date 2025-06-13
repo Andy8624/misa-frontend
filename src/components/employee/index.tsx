@@ -1,154 +1,167 @@
 import { AddEmployee } from "@/components/add-employee";
 import { UpdateEmployee } from "@/components/update-employee";
+import { CreateEmployeePayload, Employee as EmployeeType } from "@/interfaces/employee.interface";
 import { Button, Modal, Table } from "antd";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { IoWarningOutline } from "react-icons/io5";
+import { useEmployees, useCreateEmployee, useUpdateEmployee, useDeleteEmployee } from "@/app/accounting/hooks/useEmployees";
 
 export const Employee: React.FC = () => {
-  const [list, setList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [idDelete, setIdDelete] = useState<string | null>(null);
-  const [itemUpdate, setItemUpdate] = useState<any | null>(null);
+  const [itemUpdate, setItemUpdate] = useState<EmployeeType | null>(null);
+  const [customerId, setCustomerId] = useState("");
+
+  // Sử dụng React Query - giống như Supplier
+  const { data: employeesData, isLoading, error } = useEmployees(customerId);
+  const createEmployeeMutation = useCreateEmployee();
+  const updateEmployeeMutation = useUpdateEmployee();
+  const deleteEmployeeMutation = useDeleteEmployee();
+
+  const list = useMemo(() => employeesData?.data || [], [employeesData?.data]);
+
+  // Chỉ set customerId một lần khi component mount - giống như Supplier
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const customerIdFromStorage = localStorage.getItem("CustomerID") || "";
+      setCustomerId(customerIdFromStorage);
+    }
+  }, []);
+
+  const handleEditClick = (id: string) => {
+    const item = list.find((item: EmployeeType) => item.id === id) || null;
+    setItemUpdate(item);
+  };
+
+  const handleDeleteClick = (id: string) => {
+    setIdDelete(id);
+  };
+
   const columns = [
     {
       title: <p className="whitespace-nowrap">Mã nhân viên</p>,
-      dataIndex: "code",
-      key: "code",
+      dataIndex: "employeeCode",
+      key: "employeeCode",
     },
     {
       title: <p className="whitespace-nowrap">Tên nhân viên</p>,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "fullName",
+      key: "fullName",
+    },
+    {
+      title: <p className="whitespace-nowrap">Giới tính</p>,
+      dataIndex: "sex",
+      key: "sex",
     },
     {
       title: <p className="whitespace-nowrap">Chức danh</p>,
-      dataIndex: "job_title",
-      key: "job_title",
+      dataIndex: "position",
+      key: "position",
+    },
+    {
+      title: <p className="whitespace-nowrap">Điện thoại</p>,
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
     },
     {
       title: <p></p>,
       dataIndex: "id",
       key: "id",
-      render: (id: any) => (
-        <div className="flex items-center gap-3 justify-end">
-          <Button
-            type="primary"
-            onClick={() =>
-              setItemUpdate(list.find((item: any) => item?.id === id) || null)
-            }
-          >
+      render: (id: string) => (
+        <div className="flex items-center gap-3">
+          <Button type="primary" onClick={() => handleEditClick(id)}>
             Sửa
           </Button>
-          <Button onClick={() => setIdDelete(id)}>Xoá</Button>
+          <Button onClick={() => handleDeleteClick(id)}>Xoá</Button>
         </div>
       ),
     },
   ];
-  useEffect(() => {
-    getListEmployee();
-  }, []);
 
-  const getListEmployee = async () => {
+  // Sử dụng mutation hooks - giống như Supplier
+  const handleAddEmployee = async (data: CreateEmployeePayload) => {
     try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/employee",
-        {
-          headers: {
-            Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-          },
-        }
-      );
-      console.log("Nhân viên", response)
-      setList(response?.data?.data || []);
-    } catch (error) { }
+      await createEmployeeMutation.mutateAsync(data);
+      setIsModalOpen(false);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   };
 
-  const handleAddEmployee = async (data: any) => {
-    let check = false;
+  const handleUpdateEmployee = async (data: CreateEmployeePayload) => {
+    if (!itemUpdate?.id) return false;
+
     try {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/employee",
-        data,
-        {
-          headers: {
-            Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-          },
-        }
-      );
-      if (response.data?.data) {
-        getListEmployee();
-        setIsModalOpen(false);
-        check = true;
-      }
+      await updateEmployeeMutation.mutateAsync({
+        id: itemUpdate.id,
+        data
+      });
+      setItemUpdate(null);
+      return true;
     } catch (error) {
-    } finally {
-      return check;
+      console.log(error);
+      return false;
     }
   };
 
   const handleAcceptDelete = async () => {
-    if (idDelete) {
-      try {
-        const response = await axios.delete(
-          process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/employee/" + idDelete,
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-            },
-          }
-        );
-        setIdDelete(null);
-        await getListEmployee();
-      } catch (error) { }
+    if (!idDelete || !customerId) return;
+
+    try {
+      await deleteEmployeeMutation.mutateAsync({
+        employeeId: idDelete,
+        customerId
+      });
+      setIdDelete(null);
+    } catch (error) {
+      console.error('Delete failed:', error);
     }
   };
 
-  const handleUpdateEmployee = async (data: any) => {
-    let check = false;
-    try {
-      if (data?.id) {
-        const response = await axios.patch(
-          process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/employee/" + data.id,
-          data,
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-            },
-          }
-        );
-        if (response.data?.data?.id) {
-          getListEmployee();
-          setItemUpdate(null);
-          check = true;
-        }
-      }
-    } catch (error) {
-    } finally {
-      return check;
-    }
-  };
+  // Wrapper functions - giống như Supplier
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+  const handleCloseUpdateModal = () => setItemUpdate(null);
+  const handleCancelDelete = () => setIdDelete(null);
+
+  // Debug log - giống như Supplier
+  console.log("Employee render count:", {
+    customerId,
+    hasData: !!employeesData,
+    listLength: list.length,
+    isLoading
+  });
+
+  if (isLoading) return <div>Đang tải...</div>;
+  if (error) return <div>Có lỗi xảy ra</div>;
 
   return (
     <div>
       <div className="overflow-auto">
         <div className="flex items-center justify-between mb-6">
           <div></div>
-          <Button type="primary" onClick={() => setIsModalOpen(true)}>
+          <Button type="primary" onClick={handleOpenModal}>
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} rowKey="id" />
+        <Table
+          dataSource={list}
+          columns={columns}
+          rowKey="id"
+          pagination={false}
+        />
       </div>
       <AddEmployee
         handleAddEmployee={handleAddEmployee}
         isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
+        setIsModalOpen={handleCloseModal}
       />
       <UpdateEmployee
         handleUpdateEmployee={handleUpdateEmployee}
-        isModalOpen={itemUpdate?.id ? true : false}
-        setIsModalOpen={() => setItemUpdate(null)}
+        isModalOpen={!!itemUpdate?.id}
+        setIsModalOpen={handleCloseUpdateModal}
         itemUpdate={itemUpdate}
       />
       <Modal
@@ -158,11 +171,9 @@ export const Employee: React.FC = () => {
             <p className="text-2xl font-semibold">Xoá nhân viên</p>
           </div>
         }
-        open={
-          typeof idDelete === "string" && idDelete?.length > 0 ? true : false
-        }
+        open={!!idDelete}
         onOk={handleAcceptDelete}
-        onCancel={() => setIdDelete(null)}
+        onCancel={handleCancelDelete}
         centered
         okText="Xác nhận"
         cancelText="Huỷ"

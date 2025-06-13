@@ -1,6 +1,8 @@
 import { Modal } from "antd";
 import { useEffect, useState } from "react";
 import { CreatePartnerPayload, LegalType, PartnerType } from "@/interfaces/partner.interface";
+import { FormField } from "@/components/common/FormField";
+import { VALIDATION_PARTNER } from "@/constants/validation-rules";
 
 interface AddCustomerProps {
   handleAddCustomer: (data: CreatePartnerPayload) => Promise<boolean>;
@@ -44,7 +46,7 @@ export const AddCustomer: React.FC<AddCustomerProps> = ({
       customerId
     };
 
-    const success = await handleAddCustomer(data);
+    const success: boolean = await handleAddCustomer(data);
     if (success) {
       // Reset form
       setLegalType(LegalType.ORGANIZATION);
@@ -113,76 +115,104 @@ export const AddCustomer: React.FC<AddCustomerProps> = ({
           </div>
         </div>
 
-        {/* Update input names and values */}
+        {/* Chỉ cần wrap input trong FormField */}
         <div className="flex gap-4">
-          <div className="flex-grow-1">
-            <p>Mã số thuế</p>
+          <FormField
+            label="Mã số thuế"
+            value={taxCode}
+            rules={VALIDATION_PARTNER.TAX_CODE}
+          >
             <input
               type="text"
               value={taxCode}
               onChange={(e) => setTaxCode(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
-          </div>
-          <div className="flex-grow-1">
-            <p>Mã khách hàng</p>
+          </FormField>
+
+          <FormField
+            label="Mã khách hàng"
+            value={partnerCode}
+            rules={VALIDATION_PARTNER.PARTNER_CODE}
+          >
             <input
               type="text"
               value={partnerCode}
               onChange={(e) => setPartnerCode(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
-          </div>
-          <div className="flex-grow-1">
-            <p>Mã ĐVCQHVNS</p>
+          </FormField>
+
+          <FormField
+            label="Mã ĐVCQHVNS"
+            value={govUnitCode}
+          >
             <input
               type="text"
               value={govUnitCode}
               onChange={(e) => setGovUnitCode(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
-          </div>
+          </FormField>
         </div>
+
         <div className="flex gap-4">
           <div className="w-1/3">
-            <p>Điện thoại</p>
-            <input
-              type="text"
+            <FormField
+              label="Điện thoại"
               value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full h-12 px-3 border outline-none rounded-md text-base"
-            />
+              rules={VALIDATION_PARTNER.PHONE_NUMBER}
+            >
+              <input
+                type="text"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-full h-12 px-3 border outline-none rounded-md text-base"
+              />
+            </FormField>
           </div>
           <div className="flex-grow-1">
-            <p>Website</p>
-            <input
-              type="text"
+            <FormField
+              label="Website"
               value={websiteUrl}
-              onChange={(e) => setWebsiteUrl(e.target.value)}
-              className="w-full h-12 px-3 border outline-none rounded-md text-base"
-            />
+              rules={VALIDATION_PARTNER.WEBSITE_URL}
+            >
+              <input
+                type="text"
+                value={websiteUrl}
+                onChange={(e) => setWebsiteUrl(e.target.value)}
+                className="w-full h-12 px-3 border outline-none rounded-md text-base"
+              />
+            </FormField>
           </div>
         </div>
+
         <div className="flex gap-4">
-          <div className="w-full">
-            <p>Tên khách hàng</p>
+          <FormField
+            label="Tên khách hàng"
+            value={fullName}
+            rules={VALIDATION_PARTNER.FULL_NAME}
+          >
             <input
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base"
             />
-          </div>
+          </FormField>
         </div>
+
         <div className="flex gap-4">
-          <div className="w-full">
-            <p>Địa chỉ</p>
+          <FormField
+            label="Địa chỉ"
+            value={address}
+          >
             <textarea
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               className="w-full h-24 p-3 border outline-none rounded-md text-base"
             />
-          </div>
+          </FormField>
         </div>
       </div>
     </Modal>
