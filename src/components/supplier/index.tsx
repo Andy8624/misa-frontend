@@ -1,162 +1,162 @@
 import { AddSupplier } from "@/components/add-supplier";
 import { UpdateSupplier } from "@/components/update-supplier";
+import { CreatePartnerPayload, Partner, PartnerTableKey } from "@/interfaces/partner.interface";
 import { Button, Modal, Table } from "antd";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { IoWarningOutline } from "react-icons/io5";
+import { useSuppliers, useCreatePartner, useUpdatePartner, useDeletePartner } from "@/app/accounting/hooks/usePartner";
 
 export const Supplier: React.FC = () => {
-  const [list, setList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [idDelete, setIdDelete] = useState<string | null>(null);
-  const [itemUpdate, setItemUpdate] = useState<any | null>(null);
+  const [itemUpdate, setItemUpdate] = useState<Partner | null>(null);
+  const [customerId, setCustomerId] = useState("");
+
+  // Sử dụng React Query
+  const { data: suppliersData, isLoading, error } = useSuppliers(customerId);
+  const createPartnerMutation = useCreatePartner();
+  const updatePartnerMutation = useUpdatePartner();
+  const deletePartnerMutation = useDeletePartner();
+
+  const list = useMemo(() => suppliersData?.data || [], [suppliersData?.data]);
+
+  // Chỉ set customerId một lần khi component mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const customerIdFromStorage = localStorage.getItem("CustomerID") || "";
+      setCustomerId(customerIdFromStorage);
+    }
+  }, []);
+
+  const handleEditClick = (id: string) => {
+    const item = list.find(item => item.id === id) || null;
+    setItemUpdate(item);
+  };
+
+  const handleDeleteClick = (id: string) => {
+    setIdDelete(id);
+  }
+
   const columns = [
     {
       title: <p className="whitespace-nowrap">Mã nhà cung cấp</p>,
-      dataIndex: "code",
-      key: "code",
+      dataIndex: PartnerTableKey.PARTNER_CODE,
+      key: PartnerTableKey.PARTNER_CODE,
     },
     {
       title: <p className="whitespace-nowrap">Tên nhà cung cấp</p>,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: PartnerTableKey.FULL_NAME,
+      key: PartnerTableKey.FULL_NAME,
     },
     {
       title: <p className="whitespace-nowrap">Địa chỉ</p>,
-      dataIndex: "address",
-      key: "address",
+      dataIndex: PartnerTableKey.ADDRESS,
+      key: PartnerTableKey.ADDRESS,
     },
     {
       title: <p className="whitespace-nowrap">Mã số thuế</p>,
-      dataIndex: "tax_code",
-      key: "tax_code",
+      dataIndex: PartnerTableKey.TAX_CODE,
+      key: PartnerTableKey.TAX_CODE,
     },
     {
       title: <p className="whitespace-nowrap">Điện thoại</p>,
-      dataIndex: "phone_number",
-      key: "phone_number",
+      dataIndex: PartnerTableKey.PHONE_NUMBER,
+      key: PartnerTableKey.PHONE_NUMBER,
     },
     {
       title: <p></p>,
-      dataIndex: "id",
-      key: "id",
-      render: (id: any) => (
+      dataIndex: PartnerTableKey.ID,
+      key: PartnerTableKey.ID,
+      render: (id: string) => (
         <div className="flex items-center gap-3">
-          <Button type="primary" onClick={() => setItemUpdate(list.find((item: any) => item?.id === id) || null)}>
+          <Button type="primary" onClick={() => handleEditClick(id)}>
             Sửa
           </Button>
-          <Button onClick={() => setIdDelete(id)}>Xoá</Button>
+          <Button onClick={() => handleDeleteClick(id)}>Xoá</Button>
         </div>
       ),
     },
-  ];
-  useEffect(() => {
-    getListSupplier();
-  }, []);
+  ]
 
-  const getListSupplier = async () => {
+  const handleAddSupplier = async (data: CreatePartnerPayload) => {
     try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner",
-        {
-          params: {
-            filter: { type: { _eq: "supplier" } },
-          },
-          headers: {
-            Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-          },
-        }
-      );
-      console.log("Nhà cc", response)
-      setList(response?.data?.data || []);
-    } catch (error) { }
+      await createPartnerMutation.mutateAsync(data);
+      setIsModalOpen(false);
+      return true;
+    } catch (error) {
+      console.log(error)
+      return false;
+    }
   };
 
-  const handleAddSupplier = async (data: any) => {
-    let check = false;
+  const handleUpdateSupplier = async (data: CreatePartnerPayload) => {
+    if (!itemUpdate?.id) return false;
+
     try {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner",
-        data,
-        {
-          headers: {
-            Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-          },
-        }
-      );
-      if (response.data?.data) {
-        getListSupplier();
-        setIsModalOpen(false);
-        check = true;
-      }
+      await updatePartnerMutation.mutateAsync({
+        id: itemUpdate.id,
+        data
+      });
+      setItemUpdate(null);
+      return true;
     } catch (error) {
-    } finally {
-      return check;
+      console.log(error)
+      return false;
     }
   };
 
   const handleAcceptDelete = async () => {
-    if (idDelete) {
-      try {
-        const response = await axios.delete(
-          process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner/" + idDelete,
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-            },
-          }
-        );
-        setIdDelete(null);
-        await getListSupplier();
-      } catch (error) { }
+    if (!idDelete) return;
+
+    try {
+      await deletePartnerMutation.mutateAsync(idDelete);
+      setIdDelete(null);
+    } catch (error) {
+      console.error('Delete failed:', error);
     }
   };
 
-  const handleUpdateSupplier = async (data: any) => {
-    let check = false;
-    try {
-      if (data?.id) {
-        const response = await axios.patch(
-          process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/partner/" + data.id,
-          data,
-          {
-            headers: {
-              Authorization: "Bearer " + process.env.NEXT_PUBLIC_API_ACCOUNTING_TOKEN,
-            },
-          }
-        );
-        if (response.data?.data?.id) {
-          getListSupplier();
-          setItemUpdate(null);
-          check = true;
-        }
-      }
-    } catch (error) {
-    } finally {
-      return check;
-    }
-  };
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+  const handleCloseUpdateModal = () => setItemUpdate(null);
+  const handleCancelDelete = () => setIdDelete(null);
+
+  // Debug log - chỉ log khi cần thiết
+  console.log("Supplier render count:", {
+    customerId,
+    hasData: !!suppliersData,
+    listLength: list.length,
+    isLoading
+  });
+
+  if (isLoading) return <div>Đang tải...</div>;
+  if (error) return <div>Có lỗi xảy ra</div>;
 
   return (
     <div>
       <div className="overflow-auto">
         <div className="flex items-center justify-between mb-6">
           <div></div>
-          <Button type="primary" onClick={() => setIsModalOpen(true)}>
+          <Button type="primary" onClick={handleOpenModal}>
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} rowKey="id" />
+        <Table
+          dataSource={list}
+          columns={columns}
+          rowKey={PartnerTableKey.ID}
+          pagination={false} // Tắt pagination nếu không cần
+        />
       </div>
       <AddSupplier
         handleAddSupplier={handleAddSupplier}
         isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
+        setIsModalOpen={handleCloseModal}
       />
       <UpdateSupplier
         handleUpdateSupplier={handleUpdateSupplier}
-        isModalOpen={itemUpdate?.id ? true : false}
-        setIsModalOpen={() => setItemUpdate(null)}
+        isModalOpen={!!itemUpdate?.id}
+        setIsModalOpen={handleCloseUpdateModal}
         itemUpdate={itemUpdate}
       />
       <Modal
@@ -166,11 +166,9 @@ export const Supplier: React.FC = () => {
             <p className="text-2xl font-semibold">Xoá nhà cung cấp</p>
           </div>
         }
-        open={
-          typeof idDelete === "string" && idDelete?.length > 0 ? true : false
-        }
+        open={!!idDelete}
         onOk={handleAcceptDelete}
-        onCancel={() => setIdDelete(null)}
+        onCancel={handleCancelDelete}
         centered
         okText="Xác nhận"
         cancelText="Huỷ"
