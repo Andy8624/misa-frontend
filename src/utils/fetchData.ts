@@ -8,7 +8,7 @@ import {
   SubjectBankAccountType,
   UnitType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import axios from "axios";
 
 export const fetchListBankAccount = async (): Promise<BankAccountType[]> => {

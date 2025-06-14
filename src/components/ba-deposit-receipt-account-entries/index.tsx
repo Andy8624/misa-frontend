@@ -1,6 +1,6 @@
 import { OPTION_BA_DEPOSIT_RECEIPT_VOUCHER_TYPE } from "@/constants/constants";
 import { BADepositReceiptAccountEntriesItem } from "@/components/ba-deposit-receipt-account-entries-item";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 
 export const BADepositReceiptAccountEntries: React.FC<{
   cashReceiptVoucherType: string;

@@ -7,7 +7,7 @@ import {
 import { OPTIONS_DISCOUNT } from "@/constants/constants";
 import { PurchaseVoucherQuantityValueItemRead } from "@/components/purchase-voucher-quantity-value-item-read";
 import { OPTION_PAYMENT_STATUS } from "@/components/sales-voucher";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 import { Select } from "antd";
 import { useEffect } from "react";
 

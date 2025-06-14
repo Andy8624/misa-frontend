@@ -1,5 +1,5 @@
 import { OPTION_PURCHASE_TYPE } from "@/constants/constants";
-import { BankAccountType } from "@types";
+import { BankAccountType } from "@/types";
 import { Select } from "antd";
 export const PurchaseVoucherPaymentOrderRead: React.FC<{
   listSupplier: any[];

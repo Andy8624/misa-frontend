@@ -76,15 +76,18 @@ export const useUpdatePartner = () => {
       partnerService.update(id, data),
     onSuccess: (data, variables) => {
       // Invalidate và refetch queries liên quan
-      if (variables.data.partnerType === "client") {
-        queryClient.invalidateQueries({
-          queryKey: QUERY_KEYS.PARTNERS.CLIENTS(variables.data.customerId),
-        });
-      } else {
-        queryClient.invalidateQueries({
-          queryKey: QUERY_KEYS.PARTNERS.SUPPLIERS(variables.data.customerId),
-        });
-      }
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.PARTNERS.CLIENTS(variables.data.customerId),
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.PARTNERS.SUPPLIERS(variables.data.customerId),
+      });
+
+      // ✅ Invalidate tất cả partner queries (đơn giản và chắc chắn)
+      queryClient.invalidateQueries({
+        queryKey: QUERY_KEYS.PARTNERS.ALL,
+      });
 
       const partnerType =
         variables.data.partnerType === "client" ? "khách hàng" : "nhà cung cấp";

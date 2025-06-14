@@ -22,7 +22,7 @@ import {
   PartnerType,
   PaymentTermsType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { AiOutlineClose, AiOutlineReload } from "react-icons/ai";
 import { ColorModeContext } from "@/contexts/color-mode";
 import Link from "next/link";

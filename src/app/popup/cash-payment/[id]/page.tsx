@@ -20,7 +20,7 @@ import {
   ChartOfAccountsType,
   GroupOfPurchasedGoodsType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import {
   fetchListChartOfAccounts,
   fetchListGroupOfPurchasedGoods,

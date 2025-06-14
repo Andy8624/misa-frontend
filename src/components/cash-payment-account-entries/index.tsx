@@ -1,6 +1,6 @@
 import { OPTION_CASH_PAYMENT_VOUCHER_TYPE } from "@/constants/constants";
 import { CashPaymentAccountEntriesItem } from "@/components/cash-payment-account-entries-item";
-import { ChartOfAccountsType, VatTaxType } from "@types";
+import { ChartOfAccountsType, VatTaxType } from "@/types";
 import { useEffect, useState } from "react";
 
 export const CashPaymentAccountEntries: React.FC<{

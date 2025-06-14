@@ -10,7 +10,7 @@ import { InputItem } from "@/components/input-item";
 import { InputNumber } from "@/components/input-number";
 import { InputText } from "@/components/input-text";
 import { OPTION_PAYMENT_STATUS } from "@/components/sales-voucher";
-import { ChartOfAccountsType, ItemType, VatTaxType } from "@types";
+import { ChartOfAccountsType, ItemType, VatTaxType } from "@/types";
 import { Select } from "antd";
 import { useEffect, useState } from "react";
 import { MdOutlineDeleteOutline } from "react-icons/md";

@@ -27,7 +27,7 @@ import {
   GroupOfPurchasedGoodsType,
   SubjectType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import { customRound } from "@/utils/customRound";
 import { InputSubject } from "@/components/input-subject";

@@ -1,5 +1,5 @@
 import { OPTION_PURCHASE_TYPE } from "@/constants/constants";
-import { PartnerType } from "@types";
+import { PartnerType } from "@/types";
 import { Select } from "antd";
 
 export const PurchaseVoucherCashPaymentVoucherRead: React.FC<{

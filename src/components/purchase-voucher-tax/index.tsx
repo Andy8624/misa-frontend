@@ -1,6 +1,6 @@
 import { OPTIONS_DISCOUNT } from "@/constants/constants";
 import { PurchaseVoucherTaxItem } from "@/components/purchase-voucher-tax-item";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 import { Select } from "antd";
 
 export const PurchaseVoucherTax: React.FC<{

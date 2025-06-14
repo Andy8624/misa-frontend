@@ -1,5 +1,6 @@
 'use client'
 
+import { withAuth } from "../auth/withAuth"
 import SideBar from "./components/layouts/SideBar"
 import TopHeader from "./components/layouts/TopHeader"
 
@@ -18,4 +19,4 @@ const AccountingLayout = ({ children }: AccountingLayoutProps) => {
     )
 }
 
-export default AccountingLayout
+export default withAuth(AccountingLayout)

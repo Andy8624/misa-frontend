@@ -1,7 +1,7 @@
 import {
   OPTION_SALES_TYPE,
 } from "@/components/sales-voucher";
-import { BankAccountType } from "@types";
+import { BankAccountType } from "@/types";
 import { Select } from "antd";
 import { useEffect, useState } from "react";
 

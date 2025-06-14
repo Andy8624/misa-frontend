@@ -12,7 +12,7 @@ import {
   EmployeeType,
   PartnerType,
   PaymentTermsType,
-} from "@types";
+} from "@/types";
 import {
   fetchListBankAccount,
   fetchListChartOfAccounts,

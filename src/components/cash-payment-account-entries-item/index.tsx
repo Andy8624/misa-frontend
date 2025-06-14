@@ -3,7 +3,7 @@ import { InputChartOfAccounts } from "@/components/input-chart-of-accounts";
 import { InputNumber } from "@/components/input-number";
 import { InputSubject } from "@/components/input-subject";
 import { InputText } from "@/components/input-text";
-import { ChartOfAccountsType, SubjectType, VatTaxType } from "@types";
+import { ChartOfAccountsType, SubjectType, VatTaxType } from "@/types";
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";
 

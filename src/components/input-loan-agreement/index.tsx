@@ -1,4 +1,4 @@
-import { LoanAgreementType } from "@types";
+import { LoanAgreementType } from "@/types";
 import { formatDateToDDMMYYYY } from "@/utils/formatDateToDDMMYYYY";
 import { Popover } from "antd";
 import { useState } from "react";
@@ -37,8 +37,8 @@ export const InputLoanAgreement: React.FC<{
                     <tr
                       key={item.id}
                       className={`cursor-pointer transition-all ${value === item?.id
-                          ? "bg-blue-500 text-white"
-                          : "hover:bg-blue-100"
+                        ? "bg-blue-500 text-white"
+                        : "hover:bg-blue-100"
                         }`}
                       onClick={() => handleSelect(item)}
                     >

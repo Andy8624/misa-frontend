@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { PURCHASE_VOUCHER_OPTION_PAYMENT_STATUS } from "@/constants/constants";
-import { ChartOfAccountsType, PartnerType, UnitType } from "@types";
+import { ChartOfAccountsType, PartnerType, UnitType } from "@/types";
 import { ServicePurchaseVoucherItemsAccountingRead } from "@/components/service-purchase-voucher-items-accounting-read";
 
 export const ServicePurchaseVoucherAccountingRead: React.FC<{

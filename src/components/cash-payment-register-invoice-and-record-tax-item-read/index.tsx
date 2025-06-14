@@ -3,7 +3,7 @@ import {
   GroupOfPurchasedGoodsType,
   PartnerType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { customRound } from "@/utils/customRound";
 import { formatDateToYYYYMMDD } from "@/utils/formatDateToYYYYMMDD";
 import { Button, Select } from "antd";

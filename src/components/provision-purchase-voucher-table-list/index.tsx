@@ -1,6 +1,6 @@
 import { ProvisionPurchaseVoucherTableRow } from "@/components/provision-purchase-voucher-table-row";
 import { Select } from "antd";
-import { ChartOfAccountsType, VatTaxType } from "@types";
+import { ChartOfAccountsType, VatTaxType } from "@/types";
 import { OPTIONS_SA_SERVICE_DISCOUNT } from "@/constants/constants";
 import { useEffect, useState } from "react";
 import { customRound } from "@/utils/customRound";

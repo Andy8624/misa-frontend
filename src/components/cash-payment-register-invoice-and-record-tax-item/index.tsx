@@ -4,7 +4,7 @@ import {
   GroupOfPurchasedGoodsType,
   PartnerType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { customRound } from "@/utils/customRound";
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";

@@ -1,4 +1,5 @@
 'use client'
+import { withAuth } from '../auth/withAuth'
 import Sidebar from './components/layouts/Sidebar'
 
 interface DashboardLayoutProps {
@@ -16,4 +17,4 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     )
 }
 
-export default DashboardLayout
+export default withAuth(DashboardLayout)

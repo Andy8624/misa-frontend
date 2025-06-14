@@ -4,7 +4,7 @@ import { InputLoanAgreement } from "@/components/input-loan-agreement";
 import { InputNumber } from "@/components/input-number";
 import { InputSubject } from "@/components/input-subject";
 import { InputText } from "@/components/input-text";
-import { ChartOfAccountsType, LoanAgreementType, PartnerType } from "@types";
+import { ChartOfAccountsType, LoanAgreementType, PartnerType } from "@/types";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 

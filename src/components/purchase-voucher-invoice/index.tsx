@@ -1,6 +1,6 @@
 import { InputDate } from "@/components/input-date";
 import { InputSupplier } from "@/components/input-supplier";
-import { PartnerType } from "@types";
+import { PartnerType } from "@/types";
 import { Select } from "antd";
 export const PurchaseVoucherInvoice: React.FC<{
   listSupplier: PartnerType[];

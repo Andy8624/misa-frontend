@@ -3,7 +3,7 @@ import { InputCustomer } from "@/components/input-customer";
 import { InputDate } from "@/components/input-date";
 import { InputEmployee } from "@/components/input-employee";
 import { OPTION_SALES_TYPE } from "@/components/sales-voucher";
-import { BankAccountType, EmployeeType, PartnerType } from "@types";
+import { BankAccountType, EmployeeType, PartnerType } from "@/types";
 import { Select } from "antd";
 import { useEffect, useState } from "react";
 

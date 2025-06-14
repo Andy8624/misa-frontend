@@ -1,6 +1,6 @@
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";
-import { ChartOfAccountsType, PartnerType, VatTaxType } from "@types";
+import { ChartOfAccountsType, PartnerType, VatTaxType } from "@/types";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import { InputItem } from "@/components/input-item";
 import { InputText } from "@/components/input-text";

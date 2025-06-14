@@ -4,7 +4,7 @@ import {
   OPTION_BA_WITHDRAW_PAYMENT_VOUCHER_TYPE,
 } from "@/constants/constants";
 import { BAWithdrawPaymentAccountEntriesItemRead } from "@/components/ba-withdraw-payment-account-entries-item-read";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 
 export const BAWithdrawPaymentAccountEntriesRead: React.FC<{
   paymentType: string;

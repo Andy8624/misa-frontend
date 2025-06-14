@@ -8,7 +8,7 @@ import {
   OPTION_PAYMENT_STATUS,
   OPTION_SALES_TYPE,
 } from "@/components/sales-voucher";
-import { ChartOfAccountsType, ItemType, VatTaxType } from "@types";
+import { ChartOfAccountsType, ItemType, VatTaxType } from "@/types";
 import { customRound } from "@/utils/customRound";
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";

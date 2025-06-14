@@ -1,4 +1,4 @@
-import { Modal } from "antd";
+import { Modal, Select } from "antd";
 import { useEffect, useState } from "react";
 import { FormField } from "../common/FormField";
 import { CreateEmployeePayload } from "@/interfaces/employee.interface";
@@ -136,20 +136,19 @@ export const AddEmployee: React.FC<AddEmployeeProps> = ({
             />
           </FormField>
 
-          {/* Sửa phần giới tính thành select */}
           <FormField
             label="Giới tính"
             value={sex}
           >
-            <select
+            <Select
               value={sex}
-              onChange={(e) => setSex(e.target.value)}
+              onChange={(value) => setSex(value)}
               className="w-full h-12 px-3 border outline-none rounded-md text-base bg-white"
             >
               <option value="male">Nam</option>
               <option value="female">Nữ</option>
               <option value="other">Khác</option>
-            </select>
+            </Select>
           </FormField>
 
           <FormField

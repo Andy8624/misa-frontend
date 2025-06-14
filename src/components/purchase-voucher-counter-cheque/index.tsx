@@ -3,7 +3,7 @@ import { InputBankAccount } from "@/components/input-bank-account";
 import { InputDate } from "@/components/input-date";
 import { InputEmployee } from "@/components/input-employee";
 import { InputSupplier } from "@/components/input-supplier";
-import { BankAccountType, EmployeeType, PartnerType } from "@types";
+import { BankAccountType, EmployeeType, PartnerType } from "@/types";
 import { Select } from "antd";
 export const PurchaseVoucherCounterCheque: React.FC<{
   listSupplier: PartnerType[];

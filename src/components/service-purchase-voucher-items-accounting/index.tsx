@@ -7,7 +7,7 @@ import {
   SubjectType,
   UnitType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { InputItem } from "@/components/input-item";
 import { InputText } from "@/components/input-text";
 import { InputChartOfAccounts } from "@/components/input-chart-of-accounts";

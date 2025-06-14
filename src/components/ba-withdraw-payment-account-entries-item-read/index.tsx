@@ -11,7 +11,7 @@ import { InputText } from "@/components/input-text";
 import {
   ChartOfAccountsType,
   PartnerType,
-} from "@types";
+} from "@/types";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 

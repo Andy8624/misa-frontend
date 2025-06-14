@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { AddItem } from "@/components/add-item";
 import { UpdateItem } from "@/components/update-item";
 import { Button, Modal, Table } from "antd";
@@ -163,6 +164,7 @@ export const ItemList: React.FC = () => {
           },
         }
       );
+      console.log("Unit", response)
       setListUnit(
         response?.data?.data
           ? response.data.data.map((item: any) => ({
@@ -184,6 +186,7 @@ export const ItemList: React.FC = () => {
           },
         }
       );
+      console.log("HH and DV group", response)
       setListGoodsAndServicesGroups(
         response?.data?.data
           ? response.data.data.map((item: any) => ({
@@ -212,6 +215,7 @@ export const ItemList: React.FC = () => {
           },
         }
       );
+      console.log("HH and DV LIST", response)
       setList(
         response?.data?.data
           ? response.data.data.map((item: any) => {
@@ -236,7 +240,7 @@ export const ItemList: React.FC = () => {
   const handleAcceptDelete = async () => {
     if (idDelete) {
       try {
-        const response = await axios.delete(
+        await axios.delete(
           process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/goods_and_services_list/" +
           idDelete,
           {
@@ -288,7 +292,7 @@ export const ItemList: React.FC = () => {
             const dataMap: number[] = responseGroup.data.data.map(
               (item: any) => item.id
             );
-            const responseUpdate = await axios.patch(
+            await axios.patch(
               process.env.NEXT_PUBLIC_API_ACCOUNTING_URL + "/items/goods_and_services_list/" +
               response.data.data.id,
               {

@@ -18,7 +18,7 @@ import { BADepositReceiptAccountEntriesRead } from "@/components/ba-deposit-rece
 import { InputEmployee } from "@/components/input-employee";
 import { InputCustomer } from "@/components/input-customer";
 import { InputSubject } from "@/components/input-subject";
-import { BankAccountType, ChartOfAccountsType, PartnerType } from "@types";
+import { BankAccountType, ChartOfAccountsType, PartnerType } from "@/types";
 import { InputDate } from "@/components/input-date";
 import { InputBankAccount } from "@/components/input-bank-account";
 import { InputDebtCollector } from "@/components/input-debt-collector";

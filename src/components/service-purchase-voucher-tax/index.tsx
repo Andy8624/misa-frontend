@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import { ChartOfAccountsType, PartnerType, VatTaxType } from "@types";
+import { ChartOfAccountsType, PartnerType, VatTaxType } from "@/types";
 import { ServicePurchaseVoucherItemsTax } from "@/components/service-purchase-voucher-items-tax";
 import { useEffect, useState } from "react";
 import { customRound } from "@/utils/customRound";

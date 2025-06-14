@@ -1,7 +1,7 @@
 import { InputDate } from "@/components/input-date";
 import { InputEmployee } from "@/components/input-employee";
 import { InputSupplier } from "@/components/input-supplier";
-import { EmployeeType, PartnerType } from "@types";
+import { EmployeeType, PartnerType } from "@/types";
 import { Select } from "antd";
 
 export const PurchaseVoucherDebitVoucher: React.FC<{

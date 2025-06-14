@@ -17,7 +17,7 @@ import {
   PaymentTermsType,
   UnitType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { AiOutlineClose, AiOutlineReload } from "react-icons/ai";
 import Link from "next/link";
 import {

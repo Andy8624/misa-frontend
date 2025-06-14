@@ -2,7 +2,7 @@ import { OPTION_PURCHASE_TYPE } from "@/constants/constants";
 import { InputBankAccount } from "@/components/input-bank-account";
 import { InputDate } from "@/components/input-date";
 import { InputSupplier } from "@/components/input-supplier";
-import { BankAccountType } from "@types";
+import { BankAccountType } from "@/types";
 import { Select } from "antd";
 export const PurchaseVoucherPaymentOrder: React.FC<{
   listSupplier: any[];

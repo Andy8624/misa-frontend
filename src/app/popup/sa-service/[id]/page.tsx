@@ -12,7 +12,7 @@ import {
   PartnerType,
   PaymentTermsType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import Link from "next/link";
 import { AiOutlineClose, AiOutlineReload } from "react-icons/ai";
 import {

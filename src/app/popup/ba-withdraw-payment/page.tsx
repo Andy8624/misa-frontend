@@ -31,7 +31,7 @@ import {
   PartnerType,
   SubjectBankAccountType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { InputPaymentAccount } from "@/components/input-payment-account";
 import { InputSupplier } from "@/components/input-supplier";
 import { InputSubject } from "@/components/input-subject";

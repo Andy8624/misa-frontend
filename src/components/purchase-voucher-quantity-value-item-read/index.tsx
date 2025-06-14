@@ -6,7 +6,7 @@ import {
 } from "@/constants/constants";
 import { OPTIONS_DISCOUNT } from "@/constants/constants";
 import { OPTION_PAYMENT_STATUS } from "@/components/sales-voucher";
-import { ChartOfAccountsType, VatTaxType } from "@types";
+import { ChartOfAccountsType, VatTaxType } from "@/types";
 import { Select } from "antd";
 import { useEffect, useState } from "react";
 import { MdOutlineDeleteOutline } from "react-icons/md";

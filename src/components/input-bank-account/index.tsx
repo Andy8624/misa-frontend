@@ -1,4 +1,4 @@
-import { BankAccountType } from "@types";
+import { BankAccountType } from "@/types";
 import { Popover } from "antd";
 import { useState } from "react";
 import { IoIosArrowDown, IoMdArrowDropdown } from "react-icons/io";
@@ -35,11 +35,10 @@ export const InputBankAccount: React.FC<{
                   {list.map((item: BankAccountType) => (
                     <tr
                       key={item.id}
-                      className={`cursor-pointer transition-all ${
-                        value === item?.id
+                      className={`cursor-pointer transition-all ${value === item?.id
                           ? "bg-blue-500 text-white"
                           : "hover:bg-blue-100"
-                      }`}
+                        }`}
                       onClick={() => handleSelect(item)}
                     >
                       <td className="px-4 py-2.5">

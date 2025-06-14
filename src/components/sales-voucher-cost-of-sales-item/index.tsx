@@ -2,7 +2,7 @@ import { InputChartOfAccounts } from "@/components/input-chart-of-accounts";
 import { InputItem } from "@/components/input-item";
 import { InputNumber } from "@/components/input-number";
 import { InputText } from "@/components/input-text";
-import { ChartOfAccountsType, ItemType } from "@types";
+import { ChartOfAccountsType, ItemType } from "@/types";
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";
 

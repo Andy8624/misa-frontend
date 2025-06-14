@@ -1,7 +1,7 @@
 import { InputCustomer } from "@/components/input-customer";
 import { InputDate } from "@/components/input-date";
 import { OPTION_PAYMENT_STATUS } from "@/components/sales-voucher";
-import { PartnerType } from "@types";
+import { PartnerType } from "@/types";
 import { formatDateToYYYYMMDD } from "@/utils/formatDateToYYYYMMDD";
 import { Select } from "antd";
 import { useEffect, useState } from "react";

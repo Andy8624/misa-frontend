@@ -19,7 +19,7 @@ import {
   PartnerType,
   PaymentTermsType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import {
   fetchListBankAccount,
   fetchListChartOfAccounts,

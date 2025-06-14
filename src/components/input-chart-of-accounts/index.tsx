@@ -1,4 +1,4 @@
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 import { Popover } from "antd";
 import { useState } from "react";
 import { IoIosArrowDown, IoMdArrowDropdown } from "react-icons/io";
@@ -34,11 +34,10 @@ export const InputChartOfAccounts: React.FC<{
                   {list.map((item: ChartOfAccountsType) => (
                     <tr
                       key={item.id}
-                      className={`cursor-pointer transition-all ${
-                        value === item?.id
+                      className={`cursor-pointer transition-all ${value === item?.id
                           ? "bg-blue-500 text-white"
                           : "hover:bg-blue-100"
-                      }`}
+                        }`}
                       onClick={() => handleSelect(item)}
                     >
                       <td className="px-4 py-2.5">
@@ -67,7 +66,7 @@ export const InputChartOfAccounts: React.FC<{
               )?.account_number || ""}
             </p>
             <IoMdArrowDropdown className="text-xl" />
-          </div>  
+          </div>
         </Popover>
       </div>
     </div>

@@ -3,7 +3,7 @@ import {
   ChartOfAccountsType,
   PartnerType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { ServicePurchaseVoucherItemsTaxRead } from "@/components/service-purchase-voucher-items-tax-read";
 
 export const ServicePurchaseVoucherTaxRead: React.FC<{

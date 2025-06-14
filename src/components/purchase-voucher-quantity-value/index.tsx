@@ -7,7 +7,7 @@ import {
 import { OPTIONS_DISCOUNT } from "@/constants/constants";
 import { PurchaseVoucherQuantityValueItem } from "@/components/purchase-voucher-quantity-value-item";
 import { OPTION_PAYMENT_STATUS } from "@/components/sales-voucher";
-import { ChartOfAccountsType, VatTaxType } from "@types";
+import { ChartOfAccountsType, VatTaxType } from "@/types";
 import { customRound } from "@/utils/customRound";
 import { Select } from "antd";
 import { useEffect, useState } from "react";

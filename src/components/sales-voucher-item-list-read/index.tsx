@@ -5,7 +5,7 @@ import {
   OPTION_PAYMENT_STATUS,
   OPTION_SALES_TYPE,
 } from "@/components/sales-voucher";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 import { SalesVoucherItemRead } from "@/components/sales-voucher-item-read";
 
 export const SalesVoucherItemListRead: React.FC<{

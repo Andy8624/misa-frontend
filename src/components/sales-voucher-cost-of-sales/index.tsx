@@ -1,7 +1,7 @@
 import { OPTIONS_DISCOUNT } from "@/constants/constants";
 import { Select } from "antd";
 import { SalesVoucherCostOfSalesItem } from "@/components/sales-voucher-cost-of-sales-item";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 import { useEffect, useState } from "react";
 
 export const SalesVoucherCostOfSales: React.FC<{

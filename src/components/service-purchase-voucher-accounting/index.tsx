@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { ServicePurchaseVoucherItemsAccounting } from "@/components/service-purchase-voucher-items-accounting";
 import { PURCHASE_VOUCHER_OPTION_PAYMENT_STATUS } from "@/constants/constants";
-import { ChartOfAccountsType, PartnerType, UnitType, VatTaxType } from "@types";
+import { ChartOfAccountsType, PartnerType, UnitType, VatTaxType } from "@/types";
 import { useEffect, useState } from "react";
 import { customRound } from "@/utils/customRound";
 

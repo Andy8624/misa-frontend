@@ -4,7 +4,7 @@ import {
   OPTION_BA_WITHDRAW_PAYMENT_VOUCHER_TYPE,
 } from "@/constants/constants";
 import { BAWithdrawPaymentAccountEntriesItem } from "@/components/ba-withdraw-payment-account-entries-item";
-import { ChartOfAccountsType, VatTaxType } from "@types";
+import { ChartOfAccountsType, VatTaxType } from "@/types";
 import { useEffect, useState } from "react";
 
 export const BAWithdrawPaymentAccountEntries: React.FC<{

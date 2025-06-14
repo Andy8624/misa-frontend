@@ -1,6 +1,6 @@
 import { InputCustomer } from "@/components/input-customer";
 import { InputDate } from "@/components/input-date";
-import { EmployeeType, PartnerType } from "@types";
+import { EmployeeType, PartnerType } from "@/types";
 import { Select } from "antd";
 import { useEffect, useState } from "react";
 

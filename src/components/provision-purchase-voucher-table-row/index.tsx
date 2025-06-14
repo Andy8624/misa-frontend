@@ -2,7 +2,7 @@ import { OPTIONS_SA_SERVICE_DISCOUNT } from "@/constants/constants";
 import { InputChartOfAccounts } from "@/components/input-chart-of-accounts";
 import { InputNumber } from "@/components/input-number";
 import { InputText } from "@/components/input-text";
-import { ChartOfAccountsType, VatTaxType } from "@types";
+import { ChartOfAccountsType, VatTaxType } from "@/types";
 import { customRound } from "@/utils/customRound";
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";

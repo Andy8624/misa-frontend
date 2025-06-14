@@ -1,5 +1,5 @@
 import { OPTION_SA_SERVICE_PAYMENT_STATUS } from "@/constants/constants";
-import { PartnerType } from "@types";
+import { PartnerType } from "@/types";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import { Select } from "antd";
 import { useEffect, useState } from "react";

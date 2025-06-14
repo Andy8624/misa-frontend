@@ -1,6 +1,6 @@
 import { OPTION_SA_SERVICE_PAYMENT_STATUS } from "@/constants/constants";
 import { InputDate } from "@/components/input-date";
-import { PartnerType } from "@types";
+import { PartnerType } from "@/types";
 import { formatDateToYYYYMMDD } from "@/utils/formatDateToYYYYMMDD";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import { Select } from "antd";

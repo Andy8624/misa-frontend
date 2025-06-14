@@ -4,7 +4,7 @@ import {
   OPTION_PAYMENT_STATUS,
   OPTION_SALES_TYPE,
 } from "@/components/sales-voucher";
-import { ChartOfAccountsType } from "@types";
+import { ChartOfAccountsType } from "@/types";
 import { Button, Select } from "antd";
 import { useEffect, useState } from "react";
 

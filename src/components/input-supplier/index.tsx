@@ -1,4 +1,4 @@
-import { PartnerType } from "@types";
+import { PartnerType } from "@/types";
 import { Popover } from "antd";
 import { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
@@ -12,7 +12,7 @@ export const InputSupplier: React.FC<{
   const [openPopover, setOpenPopover] = useState(false);
 
   const handleSelect = (value: PartnerType) => {
-    if(onChange) {
+    if (onChange) {
       onChange(value);
     }
     setOpenPopover(false);
@@ -38,11 +38,10 @@ export const InputSupplier: React.FC<{
                   {list.map((item: PartnerType) => (
                     <tr
                       key={item.id}
-                      className={`cursor-pointer transition-all ${
-                        value === item?.id
+                      className={`cursor-pointer transition-all ${value === item?.id
                           ? "bg-blue-500 text-white"
                           : "hover:bg-blue-100"
-                      }`}
+                        }`}
                       onClick={() => handleSelect(item)}
                     >
                       <td className="px-4 py-2.5">{item?.code || ""}</td>

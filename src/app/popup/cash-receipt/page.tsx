@@ -15,7 +15,7 @@ import {
 } from "@/constants/constants";
 import { CashReceiptAccountEntries } from "@/components/cash-receipt-account-entries";
 import { InputCustomer } from "@/components/input-customer";
-import { EmployeeType, PartnerType } from "@types";
+import { EmployeeType, PartnerType } from "@/types";
 import { InputEmployee } from "@/components/input-employee";
 import { InputDate } from "@/components/input-date";
 import { InputSubject } from "@/components/input-subject";

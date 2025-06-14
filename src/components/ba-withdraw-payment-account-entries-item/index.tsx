@@ -14,7 +14,7 @@ import {
   PartnerType,
   SubjectType,
   VatTaxType,
-} from "@types";
+} from "@/types";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
 

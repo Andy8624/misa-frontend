@@ -15,7 +15,7 @@ import {
 } from "@/constants/constants";
 import { BADepositReceiptAccountEntries } from "@/components/ba-deposit-receipt-account-entries";
 import { InputCustomer } from "@/components/input-customer";
-import { BankAccountType, ChartOfAccountsType, PartnerType } from "@types";
+import { BankAccountType, ChartOfAccountsType, PartnerType } from "@/types";
 import { InputBankAccount } from "@/components/input-bank-account";
 import { InputSubject } from "@/components/input-subject";
 import { InputDate } from "@/components/input-date";

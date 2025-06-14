@@ -521,7 +521,7 @@ export const OPTIONS_DISCOUNT = {
   INVOICE_VALUE: {
     value: "invoice_value",
     translate: {
-      vi: "Theo số tiền trên tổng háo đơn",
+      vi: "Theo số tiền trên tổng hóa đơn",
     },
   },
 };
