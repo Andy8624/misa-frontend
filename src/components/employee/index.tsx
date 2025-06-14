@@ -1,6 +1,6 @@
 import { AddEmployee } from "@/components/add-employee";
 import { UpdateEmployee } from "@/components/update-employee";
-import { CreateEmployeePayload, Employee as EmployeeType } from "@/interfaces/employee.interface";
+import { CreateEmployeePayload, EmployeeTableKey, Employee as EmployeeType } from "@/interfaces/employee.interface";
 import { Button, Modal, Table } from "antd";
 import { useEffect, useState, useMemo } from "react";
 import { IoWarningOutline } from "react-icons/io5";
@@ -40,33 +40,33 @@ export const Employee: React.FC = () => {
   const columns = [
     {
       title: <p className="whitespace-nowrap">Mã nhân viên</p>,
-      dataIndex: "employeeCode",
-      key: "employeeCode",
+      dataIndex: EmployeeTableKey.EMPLOYEE_CODE,
+      key: EmployeeTableKey.EMPLOYEE_CODE,
     },
     {
       title: <p className="whitespace-nowrap">Tên nhân viên</p>,
-      dataIndex: "fullName",
-      key: "fullName",
+      dataIndex: EmployeeTableKey.FULLNAME,
+      key: EmployeeTableKey.FULLNAME,
     },
     {
       title: <p className="whitespace-nowrap">Giới tính</p>,
-      dataIndex: "sex",
-      key: "sex",
+      dataIndex: EmployeeTableKey.SEX,
+      key: EmployeeTableKey.SEX,
     },
     {
       title: <p className="whitespace-nowrap">Chức danh</p>,
-      dataIndex: "position",
-      key: "position",
+      dataIndex: EmployeeTableKey.POSISION,
+      key: EmployeeTableKey.POSISION,
     },
     {
       title: <p className="whitespace-nowrap">Điện thoại</p>,
-      dataIndex: "phoneNumber",
-      key: "phoneNumber",
+      dataIndex: EmployeeTableKey.PHONE_NUMBER,
+      key: EmployeeTableKey.PHONE_NUMBER,
     },
     {
       title: <p></p>,
-      dataIndex: "id",
-      key: "id",
+      dataIndex: EmployeeTableKey.ID,
+      key: EmployeeTableKey.ID,
       render: (id: string) => (
         <div className="flex items-center gap-3">
           <Button type="primary" onClick={() => handleEditClick(id)}>
@@ -149,7 +149,7 @@ export const Employee: React.FC = () => {
         <Table
           dataSource={list}
           columns={columns}
-          rowKey="id"
+          rowKey={EmployeeTableKey.ID}
           pagination={false}
         />
       </div>

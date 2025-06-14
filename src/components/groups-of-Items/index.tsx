@@ -137,7 +137,7 @@ export const GroupsOfItems: React.FC = () => {
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <AddGoodsAndServicesGroups
         handleAddGoodsAndServiceGroups={handleAddGoodsAndServiceGroups}

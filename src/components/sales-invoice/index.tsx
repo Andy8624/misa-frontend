@@ -284,7 +284,7 @@ export const SalesInvoice: React.FC = () => {
         </div>
       </div>
       <div className="overflow-auto bg-white mt-6">
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <Drawer
         title={<p className="text-xl font-semibold">Chi tiết hóa đơn đầu ra</p>}

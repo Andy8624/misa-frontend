@@ -289,7 +289,7 @@ export const PurchaseInvoice: React.FC = () => {
         </div>
       </div>
       <div className="overflow-auto mt-6 bg-white">
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <Drawer
         title={

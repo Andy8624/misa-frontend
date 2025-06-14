@@ -1,4 +1,14 @@
 import { PaginatedResponse } from "./global.interface";
+
+// Table column keys
+export enum EmployeeTableKey {
+  EMPLOYEE_CODE = "employeeCode",
+  FULLNAME = "fullName",
+  SEX = "sex",
+  POSISION = "position",
+  PHONE_NUMBER = "phoneNumber",
+  ID = "id",
+}
 export interface Employee {
   id: string;
   employeeCode: string; // Mã nhân viên

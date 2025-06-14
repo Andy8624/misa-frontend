@@ -150,7 +150,7 @@ export const Unit: React.FC = () => {
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <AddUnit
         handleAddUnit={handleAddUnit}

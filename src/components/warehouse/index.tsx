@@ -155,7 +155,7 @@ export const Warehouse: React.FC = () => {
             Thêm
           </Button>
         </div>
-        <Table dataSource={list} columns={columns} />
+        <Table dataSource={list} columns={columns} rowKey="id" />
       </div>
       <AddWarehouse
         handleAddWarehouse={handleAddWarehouse}
